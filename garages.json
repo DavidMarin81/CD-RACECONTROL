@@ -1,0 +1,132 @@
+[
+    {
+      "garage": {
+        "code": 1,
+        "name": "JD Motorsport",
+        "cars": [
+            {
+              "id" : 1, "brand" : "Dodge", "model" : "Charger", "sticker" : "JD Motorsport"
+            },
+            {
+              "id" : 2, "brand" : "Dodge", "model" : "Charger", "sticker" : "JD Motorsport"
+            }
+        ]
+      }
+    },
+    {
+        "garage": {
+          "code": 2,
+          "name": "23XI Racing",
+          "cars": [
+              {
+                "id" : 1, "brand" : "Toyota", "model" : "Camry", "sticker" : "23XI Racing"
+              },
+              {
+                 "id" : 2, "brand" : "Toyota", "model" : "Camry", "sticker" : "23XI Racing"
+              },
+              {
+                 "id" : 3, "brand" : "Toyota", "model" : "Camry", "sticker" : "23XI Racing"
+              }
+          ]
+        }
+      },
+      {
+        "garage": {
+          "code": 3,
+          "name": "RFK Racing",
+          "cars": [
+              {
+                "id" : 1, "brand" : "Toyota", "model" : "Camry", "sticker" : "RFK Racing"
+              },
+              {
+                "id" : 2, "brand" : "Toyota", "model" : "Camry", "sticker" : "RFK Racing"
+              }
+          ]
+        }
+      },
+      {
+        "garage": {
+          "code": 4,
+          "name": "Niece Motorsports",
+          "cars": [
+                {
+                 "id" : 1, "brand" : "Dodge", "model" : "Charger", "sticker" : "Niece Motorsports"
+                },
+                {
+                  "id" : 2, "brand" : "Dodge", "model" : "Charger", "sticker" : "Niece Motorsports"
+                },
+                {
+                  "id" : 3, "brand" : "Dodge", "model" : "Charger", "sticker" : "Niece Motorsports"
+                },
+                {
+                  "id" : 4, "brand" : "Dodge", "model" : "Charger", "sticker" : "Niece Motorsports"
+                }
+          ]
+        }
+      },
+      {
+        "garage": {
+          "code": 5,
+          "name": "Richard Childress Racing",
+          "cars": [
+            {
+              "id" : 1, "brand" : "Chevrolet", "model" : "Monte Carlo", "sticker" : "Richard Childress Racing"
+            },
+            {
+              "id" : 2, "brand" : "Chevrolet", "model" : "Monte Carlo", "sticker" : "Richard Childress Racing"
+            },
+            {
+              "id" : 3, "brand" : "Chevrolet", "model" : "Monte Carlo", "sticker" : "Richard Childress Racing"
+            }
+          ]
+        }
+      },
+      {
+        "garage": {
+          "code": 6,
+          "name": "Team Penske",
+          "cars": [
+            {
+              "id" : 1, "brand" : "Ford", "model" : "Fusion", "sticker" : "Team Penske"
+            },
+            {
+              "id" : 2, "brand" : "Ford", "model" : "Fusion", "sticker" : "Team Penske"
+            },
+            {
+              "id" : 3, "brand" : "Ford", "model" : "Fusion", "sticker" : "Team Penske"
+            }
+          ]
+        }
+      },
+      {
+        "garage": {
+          "code": 7,
+          "name": "Trackhouse Racing",
+          "cars": [
+            {
+              "id" : 1, "brand" : "Chevrolet", "model" : "Monte Carlo", "sticker" : "Trackhouse Racing"
+            },
+            {
+              "id" : 2, "brand" : "Chevrolet", "model" : "Monte Carlo", "sticker" : "Trackhouse Racing"
+            }
+          ]
+        }
+      },
+      {
+        "garage": {
+          "code": 8,
+          "name": "Steward Hass Racing",
+          "cars": [
+            {
+              "id" : 1, "brand" : "Ford", "model" : "Fusion", "sticker" : "Steward Hass Racing"
+            },
+            {
+              "id" : 2, "brand" : "Ford", "model" : "Fusion", "sticker" : "Steward Hass Racing"
+            },
+            {
+              "id" : 3, "brand" : "Ford", "model" : "Fusion", "sticker" : "Steward Hass Racing"
+            }
+          ]
+        }
+      }
+  ]
