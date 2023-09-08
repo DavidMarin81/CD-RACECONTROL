@@ -1,22 +1,28 @@
 package com.campusdual.racecontrol;
 
+import com.campusdual.racecontrol.util.Util;
+
 public class Car {
-    private static final String ID = "id";
-    private static final String BRAND = "brand";
-    private static final String MODEL = "model";
-    private static final String STICKER = "sticker";
-    private static final String NUMBER = "number";
-
-    private static final int MAX_SPEED = 250;
-
+    private static final int MAX_SPEED = 200;
+    private int speedmether = 0;
     private Long id, number;
     private String brand, model, sticker;
+    private int kmRecorridos = 0;
+    private double distance = 0.0;
 
     public Car(Long id, String brand, String model, String sticker) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.sticker = sticker;
+    }
+
+    public int getKmRecorridos() {
+        return kmRecorridos;
+    }
+
+    public void setKmRecorridos(int kmRecorridos) {
+        this.kmRecorridos = kmRecorridos;
     }
 
     public long getId() {
@@ -59,7 +65,35 @@ public class Car {
         this.sticker = sticker;
     }
 
+    public double getDistance() {
+        return distance;
+    }
 
+    public void speedUp(){
+        if(this.speedmether < MAX_SPEED){
+            this.speedmether += 10;
+        }
+    }
+
+    public void speedDown(){
+        if(this.speedmether > 0){
+            this.speedmether -= 10;
+        }
+    }
+
+    public void updateDistance(){
+        this.distance += speedmether * 16.67;
+    }
+
+    public void drive(){
+        int state = Util.randomGenerator(-1, 1);
+        if(state > -1){
+            speedUp();
+        } else {
+            speedDown();
+        }
+        updateDistance();
+    }
 
     @Override
     public String toString() {
@@ -71,4 +105,6 @@ public class Car {
                 "\n\t\t\tsticker='" + sticker + '\'' +
                 '}';
     }
+
+
 }

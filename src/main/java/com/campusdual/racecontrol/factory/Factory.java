@@ -71,7 +71,7 @@ public class Factory {
 
     }
 
-    public static List<Garage> createDDBB(){
+    public static List<Garage> createGarageDDBB(){
         List<Garage> mainGarageList = new ArrayList<>();
         JSONParser jsonParser = new JSONParser();
         try(FileReader reader = new FileReader("garages.json")){
