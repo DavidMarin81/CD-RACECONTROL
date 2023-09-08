@@ -16,6 +16,8 @@ public class RaceControl {
         //Se crea la base de datos
         garageList = Factory.createGarageDDBB();
 
+        /*
+        //Ejemplo para escoger un coche aleatorio de cada escuderia
         Car c1 = selectRandomGarageCar(garageList, "Niece Motorsports");
         Car c2 = selectRandomGarageCar(garageList, "RFK Racing");
         Car c3 = selectRandomGarageCar(garageList, "Richard Childress Racing");
@@ -27,10 +29,13 @@ public class RaceControl {
 
         startRace(carList);
         raceClassification(carList);
+         */
 
+        //Empezando con la aplicacion
+        startApp();
     }
 
-    public static Car selectRandomGarageCar(List<Garage> carList, String garageName){
+    public static Car selectRandomGarageCar(String garageName){
         Car carSelected = null;
         List<Car> carsFromGarage = new ArrayList<>();
         for(Garage g : garageList){
@@ -47,6 +52,18 @@ public class RaceControl {
             }
         }
         return carSelected;
+    }
+
+    public static List<Car> selectCarFromAGarage(String garageName){
+        List<Car> carsFromGarage = new ArrayList<>();
+        for(Garage g : garageList){
+            if(g.getName().equals(garageName)){
+                for(Car c : g.getCarList()){
+                    carsFromGarage.add(c);
+                }
+            }
+        }
+        return carsFromGarage;
     }
 
     public static void startRace(List<Car> carList) {
@@ -115,6 +132,22 @@ public class RaceControl {
         System.out.println("\t2.- Elimination Race");
         System.out.println("\t0.- Exit");
         System.out.println("=======================================");
+        int option;
+        do {
+            option = Input.integer("Select an option: ");
+            switch (option) {
+                case 0:
+                    break;
+                case 1:
+                    raceStandardMenu();
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Wrong option!!!");
+                    break;
+            }
+        }while (option != 0);
     }
 
     public static void raceStandardMenu(){
@@ -125,6 +158,73 @@ public class RaceControl {
         System.out.println("\t2.- Several Garage");
         System.out.println("\t0.- Exit");
         System.out.println("=======================================");
+        int option;
+        do {
+            option = Input.integer("Select an option: ");
+            switch (option) {
+                case 0:
+                    break;
+                case 1:
+                    singleGarageMenu();
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Wrong option!!!");
+                    break;
+            }
+        }while (option != 0);
+    }
+
+    public static void singleGarageMenu(){
+        int contador = 1;
+        System.out.println("=======================================");
+        System.out.println("==         SINGLE RACE OPTIONS       ==");
+        System.out.println("=======================================");
+        for(Garage g : garageList){
+            System.out.println("\t\t" + contador + " -> " + g.getName());
+            contador++;
+        }
+        System.out.println("\t\t0 -> Exit");
+        System.out.println("=======================================");
+        int option;
+        String garage = "";
+        do {
+            option = Input.integer("Select a garage number: ");
+            switch (option) {
+                case 0:
+                    break;
+                case 1:
+                    garage = "JD Motorsport";
+                    break;
+                case 2:
+                    garage = "23XI Racing";
+                    break;
+                case 3:
+                    garage = "RFK Racing";
+                    break;
+                case 4:
+                    garage = "Niece Motorsports";
+                    break;
+                case 5:
+                    garage = "Richard Childress Racing";
+                    break;
+                case 6:
+                    garage = "Team Penske";
+                    break;
+                case 7:
+                    garage = "Trackhouse Racing";
+                    break;
+                case 8:
+                    garage = "Steward Hass Racing";
+                    break;
+                default:
+                    System.out.println("Wrong option!!!");
+                    break;
+            }
+            System.out.println(selectCarFromAGarage(garage));
+        }while (option != 0);
+
     }
 
     public static void raceStandartSimpleGarageMenu(){
@@ -167,6 +267,7 @@ public class RaceControl {
                 case 1:
                     break;
                 case 2:
+                    raceMenu();
                     break;
                 default:
                     System.out.println("Wrong option!!!");
