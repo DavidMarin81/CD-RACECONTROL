@@ -11,11 +11,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class Garage {
-    private static final String GARAGE = "garage";
-    private static final String CODE = "code";
-    private static final String NAME = "name";
-    private static final String CARS = "cars";
-
+    public static final String GARAGE01 = "JD Motorsport";
+    public static final String GARAGE02 = "23XI Racing";
+    public static final String GARAGE03 = "RFK Racing";
+    public static final String GARAGE04 = "Niece Motorsports";
+    public static final String GARAGE05 = "Richard Childress Racing";
+    public static final String GARAGE06 = "Team Penske";
+    public static final String GARAGE07 = "Trackhouse Racing";
+    public static final String GARAGE08 = "Steward Hass Racing";
     private long code;
     private String name;
     private List<Car> carList;
