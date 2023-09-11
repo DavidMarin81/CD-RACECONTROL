@@ -95,6 +95,11 @@ public class Car {
         updateDistance();
     }
 
+    public void restartCar(){
+        this.speedmether = 0;
+        this.kmRecorridos = 0;
+    }
+
     @Override
     public String toString() {
         return "\n\t\tCar{" +

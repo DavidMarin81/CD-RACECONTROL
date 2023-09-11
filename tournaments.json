@@ -1,0 +1,90 @@
+[
+  {
+    "id" : 1,
+    "name" : "Mushroom Cup",
+    "races" : [
+      {
+        "id" :  1,
+        "name" : "Mario Kart Stadium"
+      },
+      {
+        "id" :  2,
+        "name" : "Water Park"
+      },
+      {
+        "id" :  3,
+        "name" : "Sweet Sweet Canyon"
+      },
+      {
+        "id" :  4,
+        "name" : "Thwomp Ruins"
+      }
+    ]
+  },
+  {
+    "id" : 2,
+    "name" : "Flower Cup",
+    "races" : [
+      {
+        "id" :  1,
+        "name" : "Mario Circuit"
+      },
+      {
+        "id" :  2,
+        "name" : "Toad Harbour"
+      },
+      {
+        "id" :  3,
+        "name" : "Twisted Mansion"
+      },
+      {
+        "id" :  4,
+        "name" : "Shy Guy Falls"
+      }
+    ]
+  },
+  {
+    "id" : 3,
+    "name" : "Star Cup",
+    "races" : [
+      {
+        "id" :  1,
+        "name" : "Sunshine Airport"
+      },
+      {
+        "id" :  2,
+        "name" : "Dolphin Shoals"
+      },
+      {
+        "id" :  3,
+        "name" : "Electrodome"
+      },
+      {
+        "id" :  4,
+        "name" : "Mount Wario"
+      }
+    ]
+  },
+  {
+    "id" : 4,
+    "name" : "Special Cup",
+    "races" : [
+      {
+        "id" :  1,
+        "name" : "Cloudtop Cruise"
+      },
+      {
+        "id" :  2,
+        "name" : "Bone Dry Dunes"
+      },
+      {
+        "id" :  3,
+        "name" : "Bowser´s Castle"
+      },
+      {
+        "id" :  4,
+        "name" : "Rainbow Road"
+      }
+    ]
+  }
+]
