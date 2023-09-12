@@ -28,6 +28,7 @@ public class RaceControl {
     }
     public static void startApp(){
         int option = 0;
+        Tournament.auxListRace.clear();
         do {
             System.out.println("\n\n\n");
             System.out.println("=======================================");
@@ -42,6 +43,7 @@ public class RaceControl {
                 case 0:
                     break;
                 case 1:
+                    Tournament.showMenuTournament();
                     break;
                 case 2:
                     Race.raceMenu();

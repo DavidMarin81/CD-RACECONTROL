@@ -40,6 +40,22 @@ public abstract class Race {
         this.name = name;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<Car> getCarList() {
         return carList;
     }
@@ -65,6 +81,7 @@ public abstract class Race {
                 ", podium=" + podium +
                 '}';
     }
+
     public static void raceMenu(){
         int option;
         do {
@@ -143,12 +160,19 @@ public abstract class Race {
             }
 
             if(option != 0){
+                if(Tournament.auxListRace.isEmpty()){
+                    carList = Garage.selectCarsFromGarage(garage, garageList);
+                    selectCircuitMenu(selectCircuits());
+                    EliminatedRace.startEliminationRace(carList);
+                } else {
+                    List<Car> auxCarList = new ArrayList<>();
+                    for(Race r : Tournament.auxListRace){
+                        carList = Garage.selectCarsFromGarage(garage, garageList);
+                        EliminatedRace.startEliminationRace(carList);
+                    }
+                }
                 option = 0;
-                carList = Garage.selectCarsFromGarage(garage, garageList);
-                selectCircuitMenu(selectCircuits());
-                EliminatedRace.startEliminationRace(carList);
             }
-
         }while (option != 0);
     }
     public static void singleGarageStandardMenu(){
@@ -202,18 +226,27 @@ public abstract class Race {
 
             if(option != 0){
                 option = 0;
-                carList = Garage.selectCarsFromGarage(garage, garageList);
-                selectCircuitMenu(selectCircuits());
-                StandardRace.startRace(carList);
+                if(Tournament.auxListRace.isEmpty()){
+                    carList = Garage.selectCarsFromGarage(garage, garageList);
+                    selectCircuitMenu(selectCircuits());
+                    StandardRace.startRace(carList);
+                } else {
+                    for(Race c : Tournament.auxListRace){
+                        System.out.println("=======================================");
+                        System.out.println("Empieza la carrera:" + c.getName());
+                        carList = Garage.selectCarsFromGarage(garage, garageList);
+                        StandardRace.startRace(carList);
+                    }
+                }
             }
 
         }while (option != 0);
     }
     public static void severalEliminatedRaceMenu(){
-        List<Garage> aux = new ArrayList<>();
         List<Car> auxCarList = new ArrayList<>();
         List<Garage> garageList = RaceControl.garageList;
         List<String> garagesToRace = new ArrayList<>();
+        List<Car> listaDeCochesAuxiliar = new ArrayList<>();
         String option;
         do {
             System.out.println("=======================================");
@@ -276,8 +309,19 @@ public abstract class Race {
                             }
                         }
                     }
-
-                    EliminatedRace.startEliminationRace(carsListToRace);
+                    selectCircuitMenu(selectCircuits());
+                    if(Tournament.auxListRace.isEmpty()){
+                        EliminatedRace.startEliminationRace(carsListToRace);
+                    } else {
+                        for(Race r : Tournament.auxListRace){
+                            System.out.println("Empieza la eliminatorio en " + r.getName());
+                            for(Car c : carsListToRace){
+                                c.restartCar();
+                                listaDeCochesAuxiliar.add(c);
+                            }
+                            EliminatedRace.startEliminationRace(listaDeCochesAuxiliar);
+                        }
+                    }
                     option = "0";
                     Garage.auxGarageList.clear();
                     resetCarKm(carsListToRace);
@@ -292,7 +336,6 @@ public abstract class Race {
         }while (!option.equals("0"));
     }
     public static void severalStandardRaceMenu(){
-        List<Garage> aux = new ArrayList<>();
         List<Car> auxCarList = new ArrayList<>();
         List<Garage> garageList = RaceControl.garageList;
         List<String> garagesToRace = new ArrayList<>();
@@ -358,7 +401,7 @@ public abstract class Race {
                             }
                         }
                     }
-
+                    selectCircuitMenu(selectCircuits());
                     StandardRace.startRace(carsListToRace);
                     option = "0";
                     Garage.auxGarageList.clear();
@@ -372,28 +415,6 @@ public abstract class Race {
                     break;
             }
         }while (!option.equals("0"));
-    }
-    public static void startSingleRaceMenu(List<Car> auxCarList) {
-        int option;
-        do {
-            System.out.println("=======================================");
-            System.out.println("==         START THE RACE!!!         ==");
-            System.out.println("=======================================");
-            System.out.println("\t1.- START NOW!!!");
-            System.out.println("\t0.- Exit");
-            option = Input.integer("Select an option: ");
-            switch (option) {
-                case 0:
-                    break;
-                case 1:
-                    startRace(auxCarList);
-                    option = 0;
-                    break;
-                default:
-                    System.out.println("Wrong option!!!");
-                    break;
-            }
-        }while (option != 0);
     }
     public static void selectCircuitMenu(List<Race> raceList){
         int contador = 1;
@@ -467,8 +488,6 @@ public abstract class Race {
                     break;
             }
 
-
-
             if(option != 0){
                 option = 0;
             }
@@ -502,7 +521,10 @@ public abstract class Race {
                 carsInPodium.add(c);
             }
         }
-        resetCarKm(carList);
+        for(Car c : carList){
+            c.restartCar();
+        }
+
         return carsInPodium;
     }
     public static void resetCarKm(List<Car> carList){
@@ -511,6 +533,9 @@ public abstract class Race {
         }
     }
     public static void startRace(List<Car> carList) {
+        for(Car c : carList){
+            c.restartCar();
+        }
         int lap = 0;
         while (lap <= 10){
             for(Car c : carList){
@@ -535,6 +560,17 @@ public abstract class Race {
             }
         }
 
+        return raceList;
+    }
+    public static List<Race> selectRacesForTournament(String tournamentName){
+        List<Race> raceList = new ArrayList<>();
+        for(Tournament t : RaceControl.tournamentList){
+            if(tournamentName.equals(t.getName())){
+                for(Race r : t.getRaceList()){
+                    raceList.add(r);
+                }
+            }
+        }
         return raceList;
     }
 

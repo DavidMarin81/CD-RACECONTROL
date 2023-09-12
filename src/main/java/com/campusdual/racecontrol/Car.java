@@ -98,6 +98,7 @@ public class Car {
     public void restartCar(){
         this.speedmether = 0;
         this.kmRecorridos = 0;
+        this.distance = 0;
     }
 
     @Override

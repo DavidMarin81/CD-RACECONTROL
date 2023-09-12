@@ -2,6 +2,7 @@ package com.campusdual.racecontrol;
 
 import com.campusdual.racecontrol.util.Input;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -39,6 +40,9 @@ public class EliminatedRace extends Race{
     }
 
     public static void startEliminationRace(List<Car> carList){
+        for(Car c : carList){
+            c.restartCar();
+        }
         int lap = 0;
         int position = 1;
         while (carList.size() > 1){
