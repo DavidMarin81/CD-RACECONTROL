@@ -14,17 +14,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class RaceControl {
-    public static List<Garage> garageList;
-    public static List<Tournament> tournamentList;
 
     public static void main(String[] args) {
 
-        //Se crea la base de datos
-        garageList = Factory.createGarageDDBB();
-        tournamentList = Factory.createTournaments();
-
-        //Empezando con la aplicacion
         startApp();
+
     }
     public static void startApp(){
         int option = 0;
@@ -54,7 +48,7 @@ public class RaceControl {
             }
         }while (option != 0);
         System.out.println("Thanks for using our app!!!");
-        Factory.saveDDBB(garageList);
+        Factory.saveDDBB(Factory.getConnectionGarage());
 
     }
 

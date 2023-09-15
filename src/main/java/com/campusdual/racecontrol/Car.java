@@ -10,11 +10,31 @@ public class Car {
     private int kmRecorridos = 0;
     private double distance = 0.0;
 
+    private int puntuation = 0;
+
+    private int positionInRace;
+
     public Car(Long id, String brand, String model, String sticker) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.sticker = sticker;
+    }
+
+    public int getPuntuation() {
+        return puntuation;
+    }
+
+    public void setPuntuation(int puntuation) {
+        this.puntuation = puntuation;
+    }
+
+    public int getPositionInRace() {
+        return positionInRace;
+    }
+
+    public void setPositionInRace(int positionInRace) {
+        this.positionInRace = positionInRace;
     }
 
     public int getKmRecorridos() {

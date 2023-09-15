@@ -111,7 +111,7 @@ public abstract class Race {
         }while (option != 0);
     }
     public static void singleGarageEliminationMenu(){
-        List<Garage> garageList = RaceControl.garageList;
+        List<Garage> garageList = Factory.getConnectionGarage();
         List<Car> carList = new ArrayList<>();
         int contador = 1;
         int option;
@@ -176,7 +176,7 @@ public abstract class Race {
         }while (option != 0);
     }
     public static void singleGarageStandardMenu(){
-        List<Garage> garageList = RaceControl.garageList;
+        List<Garage> garageList = Factory.getConnectionGarage();
         List<Car> carList = new ArrayList<>();
         int contador = 1;
         int option;
@@ -244,7 +244,7 @@ public abstract class Race {
     }
     public static void severalEliminatedRaceMenu(){
         List<Car> auxCarList = new ArrayList<>();
-        List<Garage> garageList = RaceControl.garageList;
+        List<Garage> garageList = Factory.getConnectionGarage();
         List<String> garagesToRace = new ArrayList<>();
         List<Car> listaDeCochesAuxiliar = new ArrayList<>();
         String option;
@@ -336,8 +336,9 @@ public abstract class Race {
         }while (!option.equals("0"));
     }
     public static void severalStandardRaceMenu(){
+        List<Car> listaDeCochesAuxiliar = new ArrayList<>();
         List<Car> auxCarList = new ArrayList<>();
-        List<Garage> garageList = RaceControl.garageList;
+        List<Garage> garageList = Factory.getConnectionGarage();
         List<String> garagesToRace = new ArrayList<>();
         String option;
         do {
@@ -401,8 +402,23 @@ public abstract class Race {
                             }
                         }
                     }
-                    selectCircuitMenu(selectCircuits());
-                    StandardRace.startRace(carsListToRace);
+
+                    if(Tournament.auxListRace.isEmpty()){
+                        selectCircuitMenu(selectCircuits());
+                        StandardRace.startRace(carsListToRace);
+                    } else {
+                        for(Race r : Tournament.auxListRace){
+                            System.out.println("=======================================");
+                            System.out.println("\t\t" + r.getName().toUpperCase());
+                            System.out.println("=======================================");
+                            for(Car c : carsListToRace){
+                                c.restartCar();
+                                listaDeCochesAuxiliar.add(c);
+                            }
+                            StandardRace.startRace(carsListToRace);
+                        }
+                    }
+
                     option = "0";
                     Garage.auxGarageList.clear();
                     resetCarKm(carsListToRace);
@@ -518,15 +534,37 @@ public abstract class Race {
                         + "(" + c.getId() + ") "
                         + " -> Team: " + c.getSticker()
                         + " (" + Math.round((c.getDistance()*100.0) / 100.0) + " kms)");
+                c.setPositionInRace(position);
                 carsInPodium.add(c);
             }
         }
+        Podium.addPuntuation(carsInPodium);
+        Podium.showPuntuation(carsInPodium);
+
+        carList.sort(Comparator.comparing(Car::getPuntuation).reversed());
+        System.out.println("==========================================");
+        System.out.println("         GENERAL CLASSIFICATION");
+        System.out.println("==========================================");
+        int pos = 0;
+        for(Car c : carList){
+            System.out.println(++pos + "º -> " + c.getBrand() + "(" + c.getId() + ") = " + c.getPuntuation() + " ptos");
+        }
+        System.out.println("==========================================");
+
+
         for(Car c : carList){
             c.restartCar();
         }
 
         return carsInPodium;
     }
+
+    public static void getPuntuationToCar(List<Car> carList){
+        System.out.println("Se ordena la lista del primero al tercero");
+        carList.sort(Comparator.comparing(Car::getDistance).reversed());
+
+    }
+
     public static void resetCarKm(List<Car> carList){
         for(Car c : carList){
             c.restartCar();
@@ -553,7 +591,7 @@ public abstract class Race {
     }
     public static List<Race> selectCircuits(){
         List<Race> raceList = new ArrayList<>();
-        List<Tournament> tournamentList = RaceControl.tournamentList;
+        List<Tournament> tournamentList = Factory.getConnectionTournament();
         for(Tournament t : tournamentList){
             for(Race r : t.getRaceList()){
                 raceList.add(r);
@@ -564,7 +602,7 @@ public abstract class Race {
     }
     public static List<Race> selectRacesForTournament(String tournamentName){
         List<Race> raceList = new ArrayList<>();
-        for(Tournament t : RaceControl.tournamentList){
+        for(Tournament t : Factory.getConnectionTournament()){
             if(tournamentName.equals(t.getName())){
                 for(Race r : t.getRaceList()){
                     raceList.add(r);

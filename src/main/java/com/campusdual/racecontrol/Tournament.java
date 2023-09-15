@@ -1,5 +1,6 @@
 package com.campusdual.racecontrol;
 
+import com.campusdual.racecontrol.factory.Factory;
 import com.campusdual.racecontrol.util.Input;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class Tournament {
             System.out.println("=======================================");
             System.out.println("==         SELECT A TOURNAMENT       ==");
             System.out.println("=======================================");
-            for(Tournament t : RaceControl.tournamentList){
+            for(Tournament t : Factory.getConnectionTournament()){
                 System.out.println("\t" + contador++ + " -> " + t.getName());
             }
             System.out.println("\t0.- Exit");

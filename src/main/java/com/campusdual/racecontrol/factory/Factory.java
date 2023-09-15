@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Factory {
-    public static List<Garage> garageList = Factory.createGarageDDBB();
-    public static List<Tournament> tournamentList = Factory.createTournaments();
-
     //Garages
     private static final String GARAGE = "garage";
     private static final String CODE = "code";
@@ -29,9 +26,20 @@ public class Factory {
     private static final String MODEL = "model";
     private static final String STICKER = "sticker";
     private static final String NUMBER = "number";
-
     //Tournaments
     private static final String RACES = "races";
+
+    private Factory(){
+
+    }
+
+    public static List<Garage> getConnectionGarage(){
+        return createGarageDDBB();
+    }
+
+    public static List<Tournament> getConnectionTournament(){
+        return createTournamentsDDBB();
+    }
 
     public static void showInfoGarages(JSONObject jsonObject){
         JSONObject garage = (JSONObject) jsonObject.get(Factory.GARAGE);
@@ -54,7 +62,7 @@ public class Factory {
 
     }
 
-    public static List<Garage> createGarageDDBB(){
+    private static List<Garage> createGarageDDBB(){
         List<Garage> mainGarageList = new ArrayList<>();
 
         JSONParser jsonParser = new JSONParser();
@@ -68,7 +76,6 @@ public class Factory {
                 Garage garage = createObjects((JSONObject) garages);
                 mainGarageList.add(garage);
             }
-            System.out.println("Se ha generado la BBDD correctamente");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -80,7 +87,7 @@ public class Factory {
         return mainGarageList;
     }
 
-    public static Garage createObjects(JSONObject jsonObject){
+    private static Garage createObjects(JSONObject jsonObject){
         //Create Garages
         Long garageCode = (Long)jsonObject.get(Factory.CODE);
         String garageName = (String)jsonObject.get(Factory.NAME);
@@ -104,7 +111,7 @@ public class Factory {
         return newGarage;
     }
 
-    public static List<Tournament> createTournaments(){
+    private static List<Tournament> createTournamentsDDBB(){
         List<Tournament> mainTournamentList = new ArrayList<>();
         JSONParser jsonParser = new JSONParser();
         try(FileReader reader = new FileReader("tournaments.json")){
@@ -117,7 +124,6 @@ public class Factory {
                 Tournament tournament = createObjects2((JSONObject) tournaments);
                 mainTournamentList.add(tournament);
             }
-            System.out.println("Se ha cargado los torneos y los circuitos correctamente");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -129,7 +135,7 @@ public class Factory {
         return mainTournamentList;
     }
 
-    public static Tournament createObjects2(JSONObject jsonObject){
+    private static Tournament createObjects2(JSONObject jsonObject){
         //Create Garages
         Long tournamentId = (Long)jsonObject.get(Factory.ID);
         String tournamentName = (String)jsonObject.get(Factory.NAME);

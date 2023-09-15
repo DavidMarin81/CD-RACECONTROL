@@ -95,7 +95,7 @@ public class Garage {
     public static Car selectRandomGarageCar(String garageName){
         Car carSelected = null;
         List<Car> carsFromGarage = new ArrayList<>();
-        for(Garage g : Factory.garageList){
+        for(Garage g : Factory.getConnectionGarage()){
             if(g.getName().equals(garageName)){
                 for(Car c : g.getCarList()){
                     carsFromGarage.add(c);
@@ -124,7 +124,7 @@ public class Garage {
 
     public static void checkGaragesRepetead(String garageName) {
         boolean exist = false;
-        for(Garage g : RaceControl.garageList){
+        for(Garage g : Factory.getConnectionGarage()){
             if(g.getName().equals(garageName)){
                 if(auxGarageList.isEmpty()){
                     auxGarageList.add(g);
